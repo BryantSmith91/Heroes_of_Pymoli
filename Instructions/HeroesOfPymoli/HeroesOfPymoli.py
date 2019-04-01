@@ -33,7 +33,7 @@ fempercent = (femcount/playercount)*100
 
 othcount = genderdata['Other / Non-Disclosed']
 othpercent = (othcount/playercount)*100
-
+b
 genderdf = pd.DataFrame([
     [malecount,malepercent],[femcount,fempercent],[othcount,othpercent]],
     index=['Male','Female','Other/Non-Disclosed'],
@@ -42,6 +42,43 @@ genderdf = pd.DataFrame([
 
 genderdf = genderdf.style.format({'Percent': '{:,.2f}%'})
 
+maleonlydf = purchase_data[purchase_data['Gender']=='Male']
+femonlydf = purchase_data[purchase_data['Gender']=='Female']
+otheronlydf = purchase_data[purchase_data['Gender']=='Other / Non-Disclosed']
+
+#male demographics
+malepurchasecount = maleonlydf['Purchase ID'].count()
+maleavgprice = maleonlydf['Price'].mean()
+maletotalrev = maleonlydf['Price'].sum()
+maleperperson = (maletotalrev/malecount)
+
+#female demographics
+femepurchasecount = femonlydf['Purchase ID'].count()
+femavgprice = femonlydf['Price'].mean()
+femtotalrev = femonlydf['Price'].sum()
+femperperson = (femtotalrev/femcount)
+
+#other demographics
+otherpurchasecount = otheronlydf['Purchase ID'].count()
+otheravgprice = otheronlydf['Price'].mean()
+othertotalrev = otheronlydf['Price'].sum()
+otherperperson = (othertotalrev/othcount)
+
+
+genderdemodf = pd.DataFrame({
+    "Gender":['Male','Female','Other/Non-Disclosed'],
+    "Total Purchases":[malepurchasecount,femepurchasecount,otherpurchasecount],
+    "Average Price":[maleavgprice,femavgprice,otheravgprice],
+    "Total Revenue":[maletotalrev,femtotalrev,othertotalrev],
+    "Avg Price/Gender":[maleperperson,femperperson,otherperperson]
+
+ })
+genderdemodf = genderdemodf.set_index('Gender')
+genderdemodf = genderdemodf.style.format({'Average Price': '${:,.2f}','Total Revenue': '${:,.2f}','Avg Price/Gender': '${:,.2f}'})
+genderdemodf
+
+
 
 print(PurchaseSum)
 print(genderdf)
+print(genderdemodf)
