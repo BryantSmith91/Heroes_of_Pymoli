@@ -33,7 +33,7 @@ fempercent = (femcount/playercount)*100
 
 othcount = genderdata['Other / Non-Disclosed']
 othpercent = (othcount/playercount)*100
-b
+
 genderdf = pd.DataFrame([
     [malecount,malepercent],[femcount,fempercent],[othcount,othpercent]],
     index=['Male','Female','Other/Non-Disclosed'],
@@ -80,5 +80,5 @@ genderdemodf
 
 
 print(PurchaseSum)
-print(genderdf)
-print(genderdemodf)
+print(genderdf.format(data_pandas))
+print(genderdemodf.format(data_pandas))
