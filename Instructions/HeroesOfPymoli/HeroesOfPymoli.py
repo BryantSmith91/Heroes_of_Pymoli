@@ -80,5 +80,5 @@ genderdemodf
 
 
 print(PurchaseSum)
-print(genderdf.format(data_pandas))
-print(genderdemodf.format(data_pandas))
+# print(genderdf.format(data_pandas))
+# print(genderdemodf.format(data_pandas))
